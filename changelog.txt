@@ -1,0 +1,94 @@
+HOMESTEAD: STEAMPUNK VOXEL CITY BUILDER - CHANGELOG
+====================================================
+
+[0.1.0] — 2026-09-09 — "First Steam"
+
+AÑADIDO:
+
+CORE ENGINE:
+- Motor voxel personalizado con sistema de chunks 16x16x16.
+- Carga/descarga dinámica de chunks según posición del jugador (distancia de render: 3 chunks).
+- Generación de mallas con face culling estilo greedy y coloreado por vértice.
+- Formas de colisión cóncavas para voxels sólidos.
+- Serialización/deserialización de chunks para sistema de guardado.
+
+GENERACIÓN PROCEDURAL DE MUNDO:
+- Terreno basado en ruido Fractal Brownian Motion (FBM).
+- 4 biomas distintos: Flatlands, Hills, River Valley, Industrial Zone.
+- Materiales de superficie específicos por bioma (hierba, piedra, adoquines, lecho fluvial).
+- Detalles decorativos: depósitos de carbón en colinas, vigas de hierro en zonas industriales, ornamentos de engranajes.
+- Cuerpos de agua en valles fluviales a baja elevación.
+- Variación de altura por bioma (Flatlands 4–6, Hills 3–11, River Valley 2–6, Industrial 5–6).
+
+SISTEMA DE TIPOS DE VOXEL:
+- 26 tipos únicos con propiedades individuales (sólido, transparente, conectable a tuberías, consumidor de energía, productor de agua, emisor de vapor).
+- Paleta de colores por tipo con estética steampunk latón/cobre/hierro.
+- Atlas de texturas procedural (256x256, tiles 16x16 por tipo).
+- Patrones de textura: ruido de tierra, grietas de piedra, remaches de latón, bridas de tubería, veta de madera, manómetros de caldera, dientes de engranaje, ladrillo desplazado, reflejos de vidrio, brasas de carbón, ondas de agua.
+
+JUGADOR Y CONTROLES:
+- Controlador en primera persona con mouse look y movimiento WASD.
+- Modos de movimiento: caminar / correr / volar.
+- Gravedad y colisión con suelo.
+- Raycast de interacción para colocar y destruir bloques.
+- Malla fantasma de previsualización para construcción.
+- Captura/liberación de ratón con Esc.
+
+SISTEMA DE CONSTRUCCIÓN:
+- Modo colocación de voxels (LMB colocar, RMB destruir).
+- Modo estampado de prefabs para edificios multibloque.
+- Menú de construcción con filtrado por categoría (Residencial, Industrial, Comercial, Infraestructura, Decorativo, Bloques).
+- Alineación snap-to-grid de voxels.
+
+22 PREFABS STEAMPUNK:
+- Residencial (4): Worker House, Brass Apartment, Victorian Mansion, Tenement Block.
+- Industrial (4): Steam Boiler, Foundry, Factory, Coal Mine.
+- Comercial (3): Market Stall, Shop, Tavern.
+- Infraestructura (6): Pump Station, Water Treatment Plant, Reservoir, Steam Generator, Power Substation, Sewer Outlet.
+- Decorativo (5): Gas Lamp, Gear Fountain, Clock Tower, Bronze Statue, Park Bench.
+- Cada prefab incluye puntos de conexión para redes de agua/energía/residuos.
+- Capacidad poblacional, capacidad laboral, valor comercial y bonificaciones de felicidad por edificio.
+
+SISTEMAS DE SIMULACIÓN:
+- Simulador de agua: red de flujo basada en presión con grafo de conectividad de tuberías.
+- Simulador de energía: red de conversión vapor-a-electricidad.
+- Gestor de servicios: recolección de residuos, seguimiento de satisfacción ciudadana.
+- Simulación basada en ticks con escala temporal configurable (0.1x – 10x).
+- Intervalos de tick independientes por sistema (agua 0.5s, energía 0.5s, edificios 1s, ciudadanos 2s, servicios 5s).
+
+INTERFAZ DE USUARIO:
+- HUD in-game con panel de estadísticas de ciudad (población, flujo de agua, producción energética, residuos, satisfacción, contador de ticks).
+- Indicador de modo construcción con controles contextuales.
+- Panel de menú de construcción con botones de categoría.
+- Overlay de debug (F3) mostrando nodos/aristas de agua, nodos de energía, conteo de edificios, coordenadas del jugador.
+- Retícula crosshair.
+
+SISTEMA DE GUARDADO:
+- Serialización de estado del mundo en JSON.
+- Auto-guardado cada 5 minutos.
+- Guardado/carga manual con slots con nombre.
+- Persistencia de datos de chunks y estado de edificios.
+
+ENTORNO Y RENDERIZADO:
+- Luz solar direccional con sombras.
+- Tone mapping ACES.
+- Niebla atmosférica.
+- Paleta de colores de cielo steampunk.
+- Variación de brillo por cara (aproximación de oclusión ambiental).
+- Tinte verde hierba en superficies de tierra expuesta.
+- Renderizado de agua azul translúcida.
+
+CONFIGURACIÓN DEL PROYECTO:
+- Godot 4.7.2 (render Forward Plus).
+- Viewport por defecto 1920x1080 con stretch mode canvas_items.
+- Mapa de entrada personalizado para todas las acciones del juego.
+- Nomenclatura de capas de física (World, Player, Buildings, Infrastructure, UI_Raycast).
+- Preset de exportación Windows Desktop configurado.
+
+PROBLEMAS CONOCIDOS:
+- Plantillas de exportación no incluidas — deben descargarse vía editor Godot antes de compilar .exe.
+- Atlas de texturas generado pero no aplicado aún a UVs de malla (se usa coloreado por vértice).
+- Simulación de agua solo estructural — sin animación visual de fluido aún.
+- Ciudadanos rastreados numéricamente pero no renderizados como entidades.
+- Sin sistema de audio implementado.
+- Sistema de guardado referencia métodos del motor voxel no completamente implementados.

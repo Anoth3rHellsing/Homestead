@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/voxel_engine.gd" id="1_voxel"]
+[ext_resource type="Script" path="res://scripts/player/fps_controller.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/simulation/water_simulator.gd" id="3_water"]
+[ext_resource type="Script" path="res://scripts/simulation/power_simulator.gd" id="4_power"]
+[ext_resource type="Script" path="res://scripts/simulation/service_manager.gd" id="5_service"]
+[ext_resource type="Script" path="res://scripts/ui/hud_controller.gd" id="6_hud"]
+
+[sub_resource type="Environment" id="Environment_001"]
+background_mode = 1
+background_color = Color(0.55, 0.7, 0.85, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.6, 0.55, 0.5, 1)
+ambient_light_energy = 1.0
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.5, 0.6, 0.7, 1)
+fog_density = 0.0008
+
+[node name="Main" type="Node3D"]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="VoxelEngine" type="Node3D" parent="World"]
+script = ExtResource("1_voxel")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("2_player")
+
+[node name="Simulation" type="Node" parent="."]
+
+[node name="WaterSimulator" type="Node" parent="Simulation"]
+script = ExtResource("3_water")
+
+[node name="PowerSimulator" type="Node" parent="Simulation"]
+script = ExtResource("4_power")
+
+[node name="ServiceManager" type="Node" parent="Simulation"]
+script = ExtResource("5_service")
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("6_hud")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.866025, 0, -0.5, -0.25, 0.866025, -0.433013, 0.433013, 0.5, 0.75, 0, 80, 0)
+light_color = Color(1, 0.95, 0.85, 1)
+light_energy = 1.8
+shadow_enabled = true
+directional_shadow_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_001")

@@ -1,0 +1,8 @@
+node_modules/
+Executables/
+.godot/
+*.exe
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
